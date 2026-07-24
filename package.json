@@ -1,5 +1,5 @@
 {
-  "name": "06-jobs-api",
+  "name": "Service-Log-API",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -27,5 +27,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.9"
+  },
+  "allowScripts": {
+    "nodemon@2.0.9": true
   }
 }
