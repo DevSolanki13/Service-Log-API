@@ -5,6 +5,7 @@ const ServiceModal = ({ isOpen, onClose, onSubmit, service = null, vehicles = []
   const [serviceName, setServiceName] = useState('');
   const [vehicleName, setVehicleName] = useState('');
   const [status, setStatus] = useState('Completed');
+  const [description, setDescription] = useState('');
   const [items, setItems] = useState([{ description: '', price: 0 }]);
   const [nextServiceDate, setNextServiceDate] = useState('');
   const [error, setError] = useState('');
@@ -20,12 +21,14 @@ const ServiceModal = ({ isOpen, onClose, onSubmit, service = null, vehicles = []
       setServiceName(service.serviceName || '');
       setVehicleName(service.vehicleName || '');
       setStatus(service.status || 'Completed');
+      setDescription(service.description || '');
       setItems(service.items && service.items.length > 0 ? service.items : [{ description: '', price: 0 }]);
       setNextServiceDate(service.nextServiceDate ? new Date(service.nextServiceDate).toISOString().substring(0, 10) : '');
     } else {
       setServiceName('');
       setVehicleName(defaultVehicleName || '');
       setStatus('Completed');
+      setDescription('');
       setItems([{ description: '', price: 0 }]);
       setNextServiceDate('');
     }
@@ -107,6 +110,7 @@ const ServiceModal = ({ isOpen, onClose, onSubmit, service = null, vehicles = []
       serviceName,
       vehicleName,
       status,
+      description,
       items: filteredItems,
       nextServiceDate: nextServiceDate ? new Date(nextServiceDate) : null
     });
@@ -250,6 +254,17 @@ const ServiceModal = ({ isOpen, onClose, onSubmit, service = null, vehicles = []
                 style={{ paddingLeft: '14px' }}
                 value={nextServiceDate}
                 onChange={(e) => setNextServiceDate(e.target.value)}
+              />
+            </div>
+
+            <div className="form-group">
+              <label className="form-label">Description (Optional)</label>
+              <textarea
+                className="form-input"
+                style={{ padding: '10px 14px', resize: 'vertical', minHeight: '80px' }}
+                placeholder="e.g. Regular 10k mile maintenance checkup and brake replacements."
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
               />
             </div>
 

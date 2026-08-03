@@ -16,6 +16,12 @@ const ServiceLogSchema = new mongoose.Schema(
             maxlength: [50, 'Vehicle name cannot be more than 50 characters']
         },
 
+        description: {
+            type: String,
+            trim: true,
+            maxlength: [500, 'Description cannot exceed 500 characters']
+        },
+
         items: [
             {
                 description: {

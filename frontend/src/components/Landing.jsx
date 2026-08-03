@@ -19,8 +19,8 @@ const Landing = ({ onAuthTrigger, onDemoTrigger }) => {
           <span>With Precision & Ease</span>
         </h1>
 
-        <div className="landing-actions" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '20px' }}>
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div className="landing-actions">
+          <div className="landing-button-group">
             <button
               className="btn-primary"
               onClick={() => onAuthTrigger('register')}
@@ -29,7 +29,6 @@ const Landing = ({ onAuthTrigger, onDemoTrigger }) => {
             </button>
             <button
               className="btn-secondary"
-              style={{ padding: '14px 28px' }}
               onClick={() => onAuthTrigger('login')}
             >
               Sign In
@@ -37,14 +36,7 @@ const Landing = ({ onAuthTrigger, onDemoTrigger }) => {
           </div>
           
           <button
-            className="btn-primary"
-            style={{ 
-              background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
-              boxShadow: '0 4px 14px rgba(16, 185, 129, 0.3)',
-              padding: '12px 24px',
-              fontSize: '0.95rem',
-              minHeight: 'auto'
-            }}
+            className="btn-demo-trigger"
             onClick={onDemoTrigger}
           >
             Try Demo Mode
@@ -53,7 +45,7 @@ const Landing = ({ onAuthTrigger, onDemoTrigger }) => {
 
         <span className="landing-features-title">Core Capabilities</span>
 
-        <div className="landing-features" style={{ gridTemplateColumns: 'repeat(3, 1fr)', maxWidth: '1000px', marginTop: '32px' }}>
+        <div className="landing-features">
           <div className="feature-box">
             <div className="feature-icon-wrapper" style={{ background: 'linear-gradient(135deg, var(--accent-primary) 0%, #2563eb 100%)' }}>
               <Car size={20} />
