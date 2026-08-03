@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { LogOut, Search, Plus, Calendar, Car, Edit2, Trash2, ShieldAlert, FolderHeart, X, Menu } from 'lucide-react';
+import { LogOut, Search, Plus, Calendar, Car, Edit2, Trash2, ShieldAlert, FolderHeart, X } from 'lucide-react';
 import { apiRequest } from '../utils/api';
 import ServiceModal from './ServiceModal';
 
@@ -127,7 +127,6 @@ const Dashboard = ({ token, userName, onLogout }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingService, setEditingService] = useState(null);
   const [serviceToDelete, setServiceToDelete] = useState(null);
-  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   const fetchServices = async () => {
     setLoading(true);
@@ -489,36 +488,14 @@ const Dashboard = ({ token, userName, onLogout }) => {
 
   return (
     <div className="dashboard-layout">
-      {/* Mobile Header Bar */}
-      <header className="mobile-dashboard-header">
-        <button className="hamburger-btn" onClick={() => setIsMobileSidebarOpen(true)} title="Open Menu">
-          <Menu size={24} />
-        </button>
-        <div className="brand">
-          <img src="/favicon.svg" alt="TrackMyServices Logo" className="brand-logo" />
-          <span className="brand-name">TrackMyServices</span>
-        </div>
-        <span className="user-avatar">{userName.charAt(0).toUpperCase()}</span>
-      </header>
-
-      {/* Sidebar Navigation Backdrop for Mobile */}
-      {isMobileSidebarOpen && (
-        <div className="sidebar-backdrop" onClick={() => setIsMobileSidebarOpen(false)} />
-      )}
-
       {/* Sidebar Navigation */}
-      <aside className={`dashboard-sidebar ${isMobileSidebarOpen ? 'open' : ''}`}>
+      <aside className="dashboard-sidebar">
         <div className="sidebar-header">
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-            <div className="brand">
-              <img src="/favicon.svg" alt="TrackMyServices Logo" className="brand-logo" />
-              <span className="brand-name">TrackMyServices</span>
-            </div>
-            <button className="sidebar-close-btn" onClick={() => setIsMobileSidebarOpen(false)} title="Close Menu">
-              <X size={20} />
-            </button>
+          <div className="brand" style={{ marginBottom: '4px' }}>
+            <img src="/favicon.svg" alt="TrackMyServices Logo" className="brand-logo" />
+            <span className="brand-name">TrackMyServices</span>
           </div>
-          <div className="user-info" style={{ gap: '8px', padding: '8px 0', marginTop: '12px', display: 'flex', alignItems: 'center' }}>
+          <div className="user-info" style={{ gap: '8px', padding: '4px 0' }}>
             <span className="user-avatar">{userName.charAt(0).toUpperCase()}</span>
             <span style={{ fontSize: '0.9rem' }}>Hello, <strong>{userName}</strong></span>
           </div>
@@ -529,10 +506,7 @@ const Dashboard = ({ token, userName, onLogout }) => {
             <span className="menu-section-title">Overview</span>
             <button
               className={`menu-item ${selectedVehicle === 'All Vehicles' ? 'active' : ''}`}
-              onClick={() => {
-                setSelectedVehicle('All Vehicles');
-                setIsMobileSidebarOpen(false);
-              }}
+              onClick={() => setSelectedVehicle('All Vehicles')}
             >
               <div className="menu-item-left">
                 <span>📊</span>
@@ -550,10 +524,7 @@ const Dashboard = ({ token, userName, onLogout }) => {
                 <button
                   key={v._id}
                   className={`menu-item ${selectedVehicle === v.name ? 'active' : ''}`}
-                  onClick={() => {
-                    setSelectedVehicle(v.name);
-                    setIsMobileSidebarOpen(false);
-                  }}
+                  onClick={() => setSelectedVehicle(v.name)}
                 >
                   <div className="menu-item-left">
                     <span>{v.type === '2 Wheeler' ? '🏍️' : '🚗'}</span>
@@ -582,7 +553,6 @@ const Dashboard = ({ token, userName, onLogout }) => {
               setNewVehicleName('');
               setNewVehicleType('4 Wheeler');
               setIsVehicleModalOpen(true);
-              setIsMobileSidebarOpen(false);
             }}
           >
             <Plus size={16} />
@@ -591,10 +561,7 @@ const Dashboard = ({ token, userName, onLogout }) => {
           <button
             className="btn-secondary"
             style={{ width: '100%', justifyContent: 'center' }}
-            onClick={() => {
-              setIsMobileSidebarOpen(false);
-              onLogout();
-            }}
+            onClick={onLogout}
           >
             <LogOut size={16} />
             Logout
